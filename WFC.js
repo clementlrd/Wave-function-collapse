@@ -12,7 +12,6 @@ function wave_function_collapse(grid, tiles) {
 
   // choose random cell and collapse it
   const cell = random(low_entropy_cells);
-  console.log(cell);
   cell.setTile(random(tiles.filter((_, i) => cell.states.includes(i))));
 
   // propagate information
@@ -20,7 +19,6 @@ function wave_function_collapse(grid, tiles) {
 }
 
 function propagate_info(grid, tiles, cell, dir) {
-  console.log(dir);
   const dirs = [
     [0, 0, -1], // up
     [1, 1, 0], // right
