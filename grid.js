@@ -27,8 +27,12 @@ class Grid {
 
   setTile(x, y, tile) {
     if (0 <= x < this.dim[0] && 0 <= y < this.dim[1])
-      this.findCell(x, y).tile = tile;
+      this.findCell(x, y).setTile(tile);
     else return console.log("wrong cell position x:" + x + " y:" + y);
+  }
+
+  resetStates(states) {
+    this.grid.forEach((x) => (x.states = states));
   }
 }
 
@@ -43,6 +47,11 @@ class Cell {
 
   get collapsed() {
     return !!this.tile;
+  }
+
+  setTile(tile) {
+    this.tile = tile;
+    this.states = [];
   }
 
   display() {
