@@ -1,5 +1,5 @@
-const SIZE = [800, 800];
-const DIM = [20, 20];
+const SIZE = [1000, 800];
+const DIM = [25, 20];
 var grid;
 var tiles;
 const FOLDER = {
@@ -8,7 +8,7 @@ const FOLDER = {
 };
 
 function mouseClicked() {
-  loop();
+  noloop();
 }
 
 function setup() {

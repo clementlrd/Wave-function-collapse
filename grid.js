@@ -4,35 +4,39 @@ class Grid {
     this.height = height;
     this.dim = [dimX, dimY];
     this.grid = [];
+    this.flat_grid = [];
     this._fillGrid();
   }
 
   _fillGrid() {
     for (let i = 0; i < this.dim[0]; i++) {
+      const row = [];
       for (let j = 0; j < this.dim[1]; j++) {
-        this.grid.push(
+        row.push(
           new Cell(i, j, this.width / this.dim[0], this.height / this.dim[1])
         );
       }
+      this.grid.push(row);
     }
+    this.flat_grid = this.grid.flat();
   }
 
   display() {
-    this.grid.forEach((x) => x.display());
+    this.grid.forEach((x) => x.forEach((y) => y.display()));
   }
 
   findCell(x, y) {
-    return this.grid.find((cell) => [x, y].join() == cell.pos.join());
+    return this.grid?.[x]?.[y];
   }
 
   setTile(x, y, tile) {
-    if (0 <= x < this.dim[0] && 0 <= y < this.dim[1])
-      this.findCell(x, y).setTile(tile);
-    else return console.log("wrong cell position x:" + x + " y:" + y);
+    const cell = this.findCell(x, y);
+    if (cell) cell.setTile(tile);
+    else return console.log("cell not found at position x:" + x + " y:" + y);
   }
 
   resetStates(states) {
-    this.grid.forEach((x) => (x.states = states));
+    this.grid.forEach((x) => x.forEach((y) => (y.states = states)));
   }
 }
 

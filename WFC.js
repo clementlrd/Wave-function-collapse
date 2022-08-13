@@ -1,11 +1,11 @@
 function wave_function_collapse(grid, tiles) {
   // Find minimum of entropy
-  const min_entropy = grid.grid.reduce(
+  const min_entropy = grid.flat_grid.reduce(
     (x, cell) =>
       !cell.collapsed && cell.states.length < x ? cell.states.length : x,
     Infinity
   );
-  const low_entropy_cells = grid.grid.filter(
+  const low_entropy_cells = grid.flat_grid.filter(
     (cell) => cell.states.length == min_entropy
   );
   if (!low_entropy_cells.length) return;
@@ -15,10 +15,11 @@ function wave_function_collapse(grid, tiles) {
   cell.setTile(random(tiles.filter((_, i) => cell.states.includes(i))));
 
   // propagate information
-  propagate_info(grid, tiles, cell, -1);
+  const visited_cells = [];
+  propagate_info(grid, tiles, cell, -1, visited_cells);
 }
 
-function propagate_info(grid, tiles, cell, dir) {
+function propagate_info(grid, tiles, cell, dir, visited_cells) {
   const dirs = [
     [0, 0, -1], // up
     [1, 1, 0], // right
@@ -29,7 +30,13 @@ function propagate_info(grid, tiles, cell, dir) {
     .filter((_, i) => dir == -1 || i != (dir + 2) % 4)
     .forEach(([i, dirX, dirY]) => {
       const new_cell = grid.findCell(cell.pos[0] + dirX, cell.pos[1] + dirY);
-      if (!new_cell || new_cell.collapsed) return;
+      if (
+        !new_cell ||
+        new_cell.collapsed ||
+        visited_cells.includes(new_cell.pos.join(","))
+      )
+        return;
+      visited_cells.push(new_cell.pos.join(","));
       const len = new_cell.states.length;
       new_cell.states = new_cell.states.filter((new_state) => {
         // check if states are allowed
@@ -42,6 +49,6 @@ function propagate_info(grid, tiles, cell, dir) {
           );
       });
       if (len != new_cell.states.length)
-        propagate_info(grid, tiles, new_cell, i);
+        propagate_info(grid, tiles, new_cell, i, visited_cells);
     });
 }
