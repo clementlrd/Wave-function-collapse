@@ -9,9 +9,9 @@ class Grid {
   }
 
   _fillGrid() {
-    for (let i = 0; i < this.dim[0]; i++) {
+    for (let j = 0; j < this.dim[1]; j++) {
       const row = [];
-      for (let j = 0; j < this.dim[1]; j++) {
+      for (let i = 0; i < this.dim[0]; i++) {
         row.push(
           new Cell(i, j, this.width / this.dim[0], this.height / this.dim[1])
         );
@@ -22,11 +22,11 @@ class Grid {
   }
 
   display() {
-    this.grid.forEach((x) => x.forEach((y) => y.display()));
+    this.grid.forEach((y) => y.forEach((x) => x.display()));
   }
 
   findCell(x, y) {
-    return this.grid?.[x]?.[y];
+    return this.grid?.[y]?.[x];
   }
 
   setTile(x, y, tile) {
@@ -47,19 +47,17 @@ class Cell {
     this.height = height;
     this.tile;
     this.states = [];
-  }
-
-  get collapsed() {
-    return !!this.tile;
+    this.collapsed = false;
   }
 
   setTile(tile) {
     this.tile = tile;
     this.states = [];
+    this.collapsed = true;
   }
 
   display() {
-    if (this.collapsed) {
+    if (this.tile) {
       this.tile.display(...this.pos, this.width, this.height);
     } else {
       fill(0);

@@ -2,20 +2,22 @@ const SIZE = [1000, 800];
 const DIM = [25, 20];
 var grid;
 var tiles;
-const FOLDER = {
-  path: "demo/",
-  len: 5,
-};
+var images;
+const TEMPLATE = CIRCUIT;
 
 function mouseClicked() {
-  noloop();
+  noLoop();
+}
+
+function preload() {
+  TEMPLATE.images = TEMPLATE.paths.map((path) => loadImage(path));
 }
 
 function setup() {
   createCanvas(...SIZE);
   grid = new Grid(...SIZE, ...DIM);
-  grid.resetStates(Array.from({ length: FOLDER.len }, (_, i) => i));
-  tiles = loadTiles(FOLDER.path);
+  tiles = loadTiles();
+  grid.resetStates(Array.from({ length: tiles.length }, (_, i) => i));
 }
 
 function draw() {

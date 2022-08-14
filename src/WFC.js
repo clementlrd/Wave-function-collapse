@@ -6,12 +6,20 @@ function wave_function_collapse(grid, tiles) {
     Infinity
   );
   const low_entropy_cells = grid.flat_grid.filter(
-    (cell) => cell.states.length == min_entropy
+    (cell) => !cell.collapsed && cell.states.length == min_entropy
   );
-  if (!low_entropy_cells.length) return;
+  if (!low_entropy_cells.length) {
+    console.log("no options");
+    console.log(grid);
+    return noLoop();
+  }
 
   // choose random cell and collapse it
   const cell = random(low_entropy_cells);
+  if (!cell.states.length) {
+    cell.collapsed = true;
+    return console.log("no available cells");
+  }
   cell.setTile(random(tiles.filter((_, i) => cell.states.includes(i))));
 
   // propagate information
@@ -40,7 +48,7 @@ function propagate_info(grid, tiles, cell, dir, visited_cells) {
       const len = new_cell.states.length;
       new_cell.states = new_cell.states.filter((new_state) => {
         // check if states are allowed
-        if (cell.collapsed) return cell.tile.isTileAllowed(tiles[new_state], i);
+        if (cell.tile) return cell.tile.isTileAllowed(tiles[new_state], i);
         else
           return cell.states.reduce(
             (bool, state) =>
