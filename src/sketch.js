@@ -1,5 +1,5 @@
 const TEMPLATE = CIRCUIT;
-var MODE = MODES.click;
+var MODE = MODES.auto;
 const VERBOSE = true;
 const SIZE = [1000, 800];
 const DIM = [25, 20];
@@ -33,6 +33,7 @@ function preload() {
 
 function setup() {
   createCanvas(...SIZE);
+  textSize(8);
   grid = new Grid(...SIZE, ...DIM);
   tiles = loadTiles();
   grid.resetStates(Array.from({ length: tiles.length }, (_, i) => i));

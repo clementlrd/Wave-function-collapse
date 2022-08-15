@@ -66,9 +66,20 @@ class Cell {
     if (this.tile) {
       this.tile.display(...this.pos, this.width, this.height);
     } else {
+      push();
       fill(color);
       stroke(255);
       rect(this.pos[0] * this.width, this.pos[1] * this.height, width, height);
+      if (VERBOSE && this.pos.includes(0)) {
+        const padding = [4, 10];
+        fill(255);
+        text(
+          this.pos[Number(!this.pos[0])],
+          this.pos[0] * this.width + padding[0],
+          this.pos[1] * this.height + padding[1]
+        );
+      }
+      pop();
     }
     return this;
   }
