@@ -1,4 +1,4 @@
-const TEMPLATE = MOUNTAINS;
+const TEMPLATE = POLKA;
 var MODE = MODES.auto;
 const VERBOSE = true;
 const SIZE = [1000, 800];

@@ -50,4 +50,5 @@ The algorithm made the following images from these patterns :
 ![generated circuit 2 image](/doc/images/circuit_2.png)
 ![generated demo image](/doc/images/demo.png)
 ![generated demo tracks image](/doc/images/demo_tracks.png)
-![generated demo tracks image](/doc/images/mountains.png)
+![generated mountains image](/doc/images/mountains.png)
+![generated polka image](/doc/images/polka.png)

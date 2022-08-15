@@ -103,4 +103,12 @@ const MOUNTAINS = {
   rotations: [0, 3],
 };
 
-const TEMPLATES = [DEMO, CIRCUIT, DEMO, DEMO_TRACKS];
+const POLKA = {
+  ...DEMO,
+  name: "polka",
+  paths: ["blank", "down", "left", "right", "up"].map(
+    (x) => PATH + "polka/" + x + EXT
+  ),
+};
+
+const TEMPLATES = [DEMO, CIRCUIT, DEMO, DEMO_TRACKS, MOUNTAINS, POLKA];
