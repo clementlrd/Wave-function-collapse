@@ -1,4 +1,4 @@
-const TEMPLATE = POLKA;
+const TEMPLATE = RAIL;
 var MODE = MODES.auto;
 const VERBOSE = true;
 const SIZE = [1000, 800];

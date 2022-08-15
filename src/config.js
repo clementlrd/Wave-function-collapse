@@ -7,11 +7,11 @@ const MODES = Object.freeze({
 const RULES = {
   base: (tile, adjacent_tile, side) =>
     adjacent_tile.adjacency[(side + 2) % 4] == tile.adjacency[side],
-  circuit_4_5: (tile, adjacent_tile, side) => {
+  special: (tileId1, tileId2, tile, adjacent_tile, side) => {
     if (
       adjacent_tile.id == tile.id &&
-      [4, 5].includes(tile.adjacency[side]) &&
-      [4, 5].includes(adjacent_tile.adjacency[(side + 2) % 4])
+      [tileId1, tileId2].includes(tile.adjacency[side]) &&
+      [tileId1, tileId2].includes(adjacent_tile.adjacency[(side + 2) % 4])
     ) {
       return (
         adjacent_tile.adjacency[(side + 2) % 4] % 2 ==
@@ -77,7 +77,7 @@ const CIRCUIT = {
   ],
   rule: RULES.base,
   rules: Array.from({ length: 13 }, (_, i) =>
-    [4, 5].includes(i) ? RULES.circuit_4_5 : RULES.base
+    [4, 5].includes(i) ? (...args) => RULES.special(4, 5, ...args) : RULES.base
   ),
   rotations: [0, 0, 3, 1, 3, 3, 1, 1, 3, 3, 1, 3, 1],
 };
@@ -111,4 +111,40 @@ const POLKA = {
   ),
 };
 
-const TEMPLATES = [DEMO, CIRCUIT, DEMO, DEMO_TRACKS, MOUNTAINS, POLKA];
+const ROADS = {
+  ...DEMO,
+  name: "roads",
+  paths: ["blank", "down", "left", "right", "up"].map(
+    (x) => PATH + "roads/" + x + EXT
+  ),
+};
+
+const RAIL = {
+  name: "rail",
+  paths: Array.from({ length: 7 }).map((_, i) => PATH + "rail/tile" + i + EXT),
+  images: [],
+  adjacencies: [
+    [0, 0, 0, 0],
+    [1, 1, 1, 0],
+    [5, 0, 0, 4],
+    [4, 0, 5, 0],
+    [1, 1, 0, 0],
+    [1, 0, 1, 0],
+    [1, 1, 1, 1],
+  ],
+  rules: Array.from({ length: 7 }, (_, i) =>
+    [2, 3].includes(i) ? (...args) => RULES.special(2, 3, ...args) : RULES.base
+  ),
+  rotations: [0, 3, 3, 3, 3, 1, 0],
+};
+
+const TEMPLATES = [
+  DEMO,
+  CIRCUIT,
+  DEMO,
+  DEMO_TRACKS,
+  MOUNTAINS,
+  POLKA,
+  ROADS,
+  RAIL,
+];
