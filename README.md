@@ -8,19 +8,6 @@ I've tried my own implementation after seeing the [coding train](https://www.you
 
 The algorithm take tiles in input to generate a consistent pattern according to predefined adjency and rules. The idea of this algorithm comes from Quantum mechanics. Indeed at first, all the states ar in a superposition of possible states. The determination of a cell (collapse of the wave function) update the nearby cell's states. At the end we obtain a random but consistent pattern.
 
-## Example
-
-The algorithm made the following images from these patterns :
-- circuit tiles
-- circuit tiles from the coding train
-- demo tiles
-- demo tracks tiles
-
-![generated circuit image](/doc/images/circuit.png)
-![generated circuit 2 image](/doc/images/circuit_2.png)
-![generated demo image](/doc/images/demo.png)
-![generated demo tracks image](/doc/images/demo_tracks.png)
-
 ## Algorithm
 
 - Take a tiles among those with the least entropy (minimum of state possible here).
@@ -48,4 +35,19 @@ You can change in the `sketch.js` file the following constants :
 - the SIZE of the grid : [width, height] (default : [1000, 800])
 - the number of cells in the grid (DIM) : [n width, n height] (default: [25, 20])
 
-You can run the program by serving the `index.html` file in the `public/` folder
+You can run the program by serving the `index.html` file in the `public/` folder.
+
+## Examples
+
+The algorithm made the following images from these patterns :
+- circuit tiles
+- circuit tiles from the coding train
+- demo tiles
+- demo tracks tiles
+- mountains tiles
+
+![generated circuit image](/doc/images/circuit.png)
+![generated circuit 2 image](/doc/images/circuit_2.png)
+![generated demo image](/doc/images/demo.png)
+![generated demo tracks image](/doc/images/demo_tracks.png)
+![generated demo tracks image](/doc/images/mountains.png)

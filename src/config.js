@@ -91,4 +91,16 @@ const CIRCUIT_2 = {
   ),
 };
 
-const TEMPLATES = [DEMO, CIRCUIT];
+const MOUNTAINS = {
+  name: "mountains",
+  paths: ["blank", "down"].map((x) => PATH + "mountains/" + x + EXT),
+  images: [],
+  adjacencies: [
+    [0, 0, 0, 0],
+    [0, 1, 1, 1],
+  ],
+  rule: RULES.base,
+  rotations: [0, 3],
+};
+
+const TEMPLATES = [DEMO, CIRCUIT, DEMO, DEMO_TRACKS];

@@ -1,4 +1,4 @@
-const TEMPLATE = DEMO_TRACKS;
+const TEMPLATE = MOUNTAINS;
 var MODE = MODES.auto;
 const VERBOSE = true;
 const SIZE = [1000, 800];
