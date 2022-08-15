@@ -1,5 +1,6 @@
 const TEMPLATE = CIRCUIT;
-const MODE = AUTO;
+var MODE = MODES.click;
+const VERBOSE = true;
 const SIZE = [1000, 800];
 const DIM = [25, 20];
 
@@ -9,16 +10,21 @@ var images;
 let is_looping = true;
 
 function mouseClicked() {
-  if (MODE == AUTO) {
-    if (is_looping) {
-      noLoop();
-      is_looping = false;
-    } else {
-      loop();
-      is_looping = true;
-    }
+  switch (MODE) {
+    case MODES.auto:
+      if (is_looping) {
+        is_looping = false;
+        return noLoop();
+      } else {
+        is_looping = true;
+        return loop();
+      }
+    case MODES.click:
+      return loop();
+    case MODES.finish:
+    default:
+      return;
   }
-  loop();
 }
 
 function preload() {
@@ -36,5 +42,12 @@ function draw() {
   background(0);
   const cells_updated = wave_function_collapse(grid, tiles);
   grid.display(cells_updated);
-  MODE == AUTO ? loop() : noLoop();
+  switch (MODE) {
+    case MODES.auto:
+      return loop();
+    case MODES.click:
+    case MODES.finish:
+    default:
+      return noLoop();
+  }
 }

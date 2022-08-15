@@ -9,22 +9,34 @@ function wave_function_collapse(grid, tiles) {
     (cell) => !cell.collapsed && cell.states.length == min_entropy
   );
   if (!low_entropy_cells.length) {
-    console.log("no options");
-    console.log(grid);
-    return noLoop();
+    if (VERBOSE) {
+      console.log("no options");
+      console.log(grid);
+    }
+    MODE = MODES.finish;
+    return;
   }
 
   // choose random cell and collapse it
   const cell = random(low_entropy_cells);
   if (!cell.states.length) {
     cell.collapsed = true;
-    return console.log("no available cells");
+    if (VERBOSE) console.log("no available cells");
+    return;
   }
   cell.setTile(random(tiles.filter((_, i) => cell.states.includes(i))));
 
   // propagate information
   const visited_cells = [];
   propagate_info(grid, tiles, cell, -1, visited_cells);
+  if (VERBOSE)
+    console.log(
+      visited_cells.sort((posA, posB) => {
+        const a = posA.split(",").map(Number);
+        const b = posB.split(",").map(Number);
+        return a[0] != b[0] ? a[0] - b[0] : a[1] - b[1];
+      })
+    );
   return visited_cells;
 }
 

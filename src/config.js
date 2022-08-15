@@ -1,5 +1,8 @@
-const AUTO = 0;
-const CLICK = 1;
+const MODES = Object.freeze({
+  auto: Symbol("auto"),
+  click: Symbol("click"),
+  finish: Symbol("finish"),
+});
 
 const RULES = {
   base: (tile, adjacent_tile, side) =>

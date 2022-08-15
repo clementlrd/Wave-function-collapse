@@ -31,7 +31,7 @@ To create a pattern, insert tiles in the new folder (`tiles/new_pattern`) and ad
 
 You can change in the `sketch.js` file the following constants :
 - the TEMPLATE structure you've created in the `config.js` file
-- the MODE of display. There is two modes available : CLICK / AUTO (default) 
+- the MODE of display. There is two modes available : MODES.click / MODES.auto (default) 
 - the SIZE of the grid : [width, height] (default : [1000, 800])
 - the number of cells in the grid (DIM) : [n width, n height] (default: [25, 20])
 
