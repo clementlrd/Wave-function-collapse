@@ -25,6 +25,7 @@ function wave_function_collapse(grid, tiles) {
   // propagate information
   const visited_cells = [];
   propagate_info(grid, tiles, cell, -1, visited_cells);
+  return visited_cells;
 }
 
 function propagate_info(grid, tiles, cell, dir, visited_cells) {
@@ -36,27 +37,22 @@ function propagate_info(grid, tiles, cell, dir, visited_cells) {
   ];
   dirs
     .filter((_, i) => dir == -1 || i != (dir + 2) % 4)
-    .forEach(([i, dirX, dirY]) => {
+    .forEach(([side, dirX, dirY]) => {
       const new_cell = grid.findCell(cell.pos[0] + dirX, cell.pos[1] + dirY);
-      if (
-        !new_cell ||
-        new_cell.collapsed ||
-        visited_cells.includes(new_cell.pos.join(","))
-      )
-        return;
+      if (!new_cell || new_cell.collapsed) return;
       visited_cells.push(new_cell.pos.join(","));
       const len = new_cell.states.length;
       new_cell.states = new_cell.states.filter((new_state) => {
-        // check if states are allowed
-        if (cell.tile) return cell.tile.isTileAllowed(tiles[new_state], i);
+        // check if states are allowed next to the new tile or next all the possible states
+        if (cell.tile) return cell.tile.isTileAllowed(tiles[new_state], side);
         else
           return cell.states.reduce(
             (bool, state) =>
-              bool | tiles[state].isTileAllowed(tiles[new_state], i),
+              bool | tiles[state].isTileAllowed(tiles[new_state], side),
             true
           );
       });
       if (len != new_cell.states.length)
-        propagate_info(grid, tiles, new_cell, i, visited_cells);
+        propagate_info(grid, tiles, new_cell, side, visited_cells);
     });
 }

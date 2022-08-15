@@ -21,8 +21,14 @@ class Grid {
     this.flat_grid = this.grid.flat();
   }
 
-  display() {
-    this.grid.forEach((y) => y.forEach((x) => x.display()));
+  display(visited_cells) {
+    this.grid.forEach((row) =>
+      row.forEach((cell) =>
+        cell.display(
+          visited_cells && visited_cells.includes(cell.pos.join(",")) ? 255 : 0
+        )
+      )
+    );
   }
 
   findCell(x, y) {
@@ -56,13 +62,14 @@ class Cell {
     this.collapsed = true;
   }
 
-  display() {
+  display(color = 0) {
     if (this.tile) {
       this.tile.display(...this.pos, this.width, this.height);
     } else {
-      fill(0);
+      fill(color);
       stroke(255);
       rect(this.pos[0] * this.width, this.pos[1] * this.height, width, height);
     }
+    return this;
   }
 }

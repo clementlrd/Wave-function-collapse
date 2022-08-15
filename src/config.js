@@ -1,3 +1,6 @@
+const AUTO = 0;
+const CLICK = 1;
+
 const RULES = {
   base: (tile, adjacent_tile, side) =>
     adjacent_tile.adjacency[(side + 2) % 4] == tile.adjacency[side],
@@ -7,7 +10,6 @@ const RULES = {
       [4, 5].includes(tile.adjacency[side]) &&
       [4, 5].includes(adjacent_tile.adjacency[(side + 2) % 4])
     ) {
-      //console.log(tile, adjacent_tile);
       return (
         adjacent_tile.adjacency[(side + 2) % 4] % 2 ==
         (tile.adjacency[side] + 1) % 2

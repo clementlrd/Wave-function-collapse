@@ -4,9 +4,20 @@ var grid;
 var tiles;
 var images;
 const TEMPLATE = CIRCUIT;
+const MODE = AUTO;
+let is_looping = true;
 
 function mouseClicked() {
-  noLoop();
+  if (MODE == AUTO) {
+    if (is_looping) {
+      noLoop();
+      is_looping = false;
+    } else {
+      loop();
+      is_looping = true;
+    }
+  }
+  loop();
 }
 
 function preload() {
@@ -22,7 +33,7 @@ function setup() {
 
 function draw() {
   background(0);
-  wave_function_collapse(grid, tiles);
-  grid.display();
-  //noLoop();
+  const cells_updated = wave_function_collapse(grid, tiles);
+  grid.display(cells_updated);
+  MODE == AUTO ? loop() : noLoop();
 }
