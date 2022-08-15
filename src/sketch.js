@@ -1,4 +1,4 @@
-const TEMPLATE = CIRCUIT;
+const TEMPLATE = CIRCUIT_2;
 var MODE = MODES.auto;
 const VERBOSE = true;
 const SIZE = [1000, 800];

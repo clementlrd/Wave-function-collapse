@@ -73,4 +73,13 @@ const CIRCUIT = {
   rotations: [0, 0, 3, 1, 3, 3, 1, 1, 3, 3, 1, 3, 1],
 };
 
+const CIRCUIT_2 = {
+  ...CIRCUIT,
+  name: "circuit 2",
+  paths: Array.from(
+    { length: 13 },
+    (_, i) => PATH + "circuit-coding-train/" + i + EXT
+  ),
+};
+
 const TEMPLATES = [DEMO, CIRCUIT];

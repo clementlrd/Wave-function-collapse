@@ -10,9 +10,12 @@ The algorithm take tiles in input to generate a consistent pattern according to 
 
 ## Example
 
-The algorithm made with the circuit pattern the following image : 
+The algorithm made the following images from these patterns :
+- circuit tiles
+- circuit tiles from the coding train
 
 ![generated circuit image](/doc/images/circuit.png)
+![generated circuit 2 image](/doc/images/circuit_2.png)
 
 ## Algorithm
 
