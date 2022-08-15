@@ -1,10 +1,11 @@
+const TEMPLATE = CIRCUIT;
+const MODE = AUTO;
 const SIZE = [1000, 800];
 const DIM = [25, 20];
+
 var grid;
 var tiles;
 var images;
-const TEMPLATE = CIRCUIT;
-const MODE = AUTO;
 let is_looping = true;
 
 function mouseClicked() {
