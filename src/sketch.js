@@ -1,4 +1,4 @@
-const TEMPLATE = CIRCUIT_2;
+const TEMPLATE = DEMO_TRACKS;
 var MODE = MODES.auto;
 const VERBOSE = true;
 const SIZE = [1000, 800];

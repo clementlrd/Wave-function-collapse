@@ -32,9 +32,6 @@ const DEMO = {
   paths: ["blank", "down", "left", "right", "up"].map(
     (x) => PATH + "demo/" + x + EXT
   ),
-  paths: ["blank", "down", "left", "right", "up"].map(
-    (x) => PATH + "demo/" + x + EXT
-  ),
   images: [],
   adjacencies: [
     [0, 0, 0, 0],
@@ -44,6 +41,18 @@ const DEMO = {
     [1, 1, 0, 1],
   ],
   rule: RULES.base,
+};
+
+const DEMO_TRACKS = {
+  name: "demo tracks",
+  paths: ["blank", "down"].map((x) => PATH + "demo-tracks/" + x + EXT),
+  images: [],
+  adjacencies: [
+    [0, 0, 0, 0],
+    [0, 1, 1, 1],
+  ],
+  rule: RULES.base,
+  rotations: [0, 3],
 };
 
 const CIRCUIT = {

@@ -13,9 +13,13 @@ The algorithm take tiles in input to generate a consistent pattern according to 
 The algorithm made the following images from these patterns :
 - circuit tiles
 - circuit tiles from the coding train
+- demo tiles
+- demo tracks tiles
 
 ![generated circuit image](/doc/images/circuit.png)
 ![generated circuit 2 image](/doc/images/circuit_2.png)
+![generated demo image](/doc/images/demo.png)
+![generated demo tracks image](/doc/images/demo_tracks.png)
 
 ## Algorithm
 
