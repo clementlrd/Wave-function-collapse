@@ -47,6 +47,7 @@ The algorithm made the following images from these patterns :
 - mountains tiles
 - polka tiles
 - roads tiles
+- rail tiles
 
 ![generated circuit image](/doc/images/circuit.png)
 ![generated circuit 2 image](/doc/images/circuit_2.png)
@@ -55,3 +56,4 @@ The algorithm made the following images from these patterns :
 ![generated mountains image](/doc/images/mountains.png)
 ![generated polka image](/doc/images/polka.png)
 ![generated roads image](/doc/images/roads.png)
+![generated rail image](/doc/images/rail.png)

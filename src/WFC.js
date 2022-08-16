@@ -70,10 +70,10 @@ function propagate_info(grid, tiles, cell, dir, visited_cells) {
               bool ||
               (tiles[state].isTileAllowed(tiles[new_state], side) &&
                 tiles[new_state].isTileAllowed(tiles[state], (side + 2) % 4)),
-            true
+            false
           );
       });
       if (len != new_cell.states.length)
-        propagate_info(grid, tiles, new_cell, side, visited_cells);
+        propagate_info(grid, tiles, new_cell, -1, visited_cells);
     });
 }
