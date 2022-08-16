@@ -37,12 +37,14 @@ function setup() {
   grid = new Grid(...SIZE, ...DIM);
   tiles = loadTiles();
   grid.resetStates(Array.from({ length: tiles.length }, (_, i) => i));
+  if (VERBOSE) console.log(tiles);
 }
 
 function draw() {
   background(0);
   const cells_updated = wave_function_collapse(grid, tiles);
   grid.display(cells_updated);
+  if (VERBOSE) console.log("grid : ", grid.grid);
   switch (MODE) {
     case MODES.auto:
       return loop();

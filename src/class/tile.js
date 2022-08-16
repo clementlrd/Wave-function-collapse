@@ -19,6 +19,11 @@ class Tile {
     return this;
   }
 
+  setRotation(rot) {
+    this.rotation = rot;
+    return this;
+  }
+
   isTileAllowed(adjacent_tile, side) {
     return this.rule(adjacent_tile, side);
   }
@@ -56,5 +61,6 @@ function rotateTile(tile, index, rotation) {
   for (let i = 0; i < rotation; i++) adjacency.unshift(adjacency.pop());
   return new Tile(newImage, adjacency)
     .setRule(!TEMPLATE.rules?.length ? TEMPLATE.rule : TEMPLATE.rules[index])
-    .setId(tile.id);
+    .setId(tile.id)
+    .setRotation(rotation);
 }

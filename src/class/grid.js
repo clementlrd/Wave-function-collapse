@@ -38,6 +38,7 @@ class Grid {
   setTile(x, y, tile) {
     const cell = this.findCell(x, y);
     if (cell) cell.setTile(tile);
+    if (VERBOSE) console.log(tile);
     else return console.log("cell not found at position x:" + x + " y:" + y);
   }
 

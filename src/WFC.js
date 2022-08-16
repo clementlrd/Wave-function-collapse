@@ -24,12 +24,15 @@ function wave_function_collapse(grid, tiles) {
     if (VERBOSE) console.log("no available cells");
     return;
   }
+
+  if (VERBOSE) console.log("states : ", cell.states);
   cell.setTile(random(tiles.filter((_, i) => cell.states.includes(i))));
 
   // propagate information
   const visited_cells = [];
   propagate_info(grid, tiles, cell, -1, visited_cells);
-  if (VERBOSE)
+  // display visited cells (actually not)
+  if (false)
     console.log(
       visited_cells.sort((posA, posB) => {
         const a = posA.split(",").map(Number);
@@ -56,11 +59,17 @@ function propagate_info(grid, tiles, cell, dir, visited_cells) {
       const len = new_cell.states.length;
       new_cell.states = new_cell.states.filter((new_state) => {
         // check if states are allowed next to the new tile or next all the possible states
-        if (cell.tile) return cell.tile.isTileAllowed(tiles[new_state], side);
+        if (cell.tile)
+          return (
+            cell.tile.isTileAllowed(tiles[new_state], side) &&
+            tiles[new_state].isTileAllowed(cell.tile, (side + 2) % 4)
+          );
         else
           return cell.states.reduce(
             (bool, state) =>
-              bool | tiles[state].isTileAllowed(tiles[new_state], side),
+              bool ||
+              (tiles[state].isTileAllowed(tiles[new_state], side) &&
+                tiles[new_state].isTileAllowed(tiles[state], (side + 2) % 4)),
             true
           );
       });

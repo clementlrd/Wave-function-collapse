@@ -7,11 +7,11 @@ const MODES = Object.freeze({
 const RULES = {
   base: (tile, adjacent_tile, side) =>
     adjacent_tile.adjacency[(side + 2) % 4] == tile.adjacency[side],
-  special: (tileId1, tileId2, tile, adjacent_tile, side) => {
+  special: (adj1, adj2, tile, adjacent_tile, side) => {
     if (
       adjacent_tile.id == tile.id &&
-      [tileId1, tileId2].includes(tile.adjacency[side]) &&
-      [tileId1, tileId2].includes(adjacent_tile.adjacency[(side + 2) % 4])
+      [adj1, adj2].includes(tile.adjacency[side]) &&
+      [adj1, adj2].includes(adjacent_tile.adjacency[(side + 2) % 4])
     ) {
       return (
         adjacent_tile.adjacency[(side + 2) % 4] % 2 ==
@@ -126,14 +126,14 @@ const RAIL = {
   adjacencies: [
     [0, 0, 0, 0],
     [1, 1, 1, 0],
-    [5, 0, 0, 4],
+    [5, 4, 0, 0],
     [4, 0, 5, 0],
     [1, 1, 0, 0],
     [1, 0, 1, 0],
     [1, 1, 1, 1],
   ],
   rules: Array.from({ length: 7 }, (_, i) =>
-    [2, 3].includes(i) ? (...args) => RULES.special(2, 3, ...args) : RULES.base
+    [2, 3].includes(i) ? (...args) => RULES.special(4, 5, ...args) : RULES.base
   ),
   rotations: [0, 3, 3, 3, 3, 1, 0],
 };
